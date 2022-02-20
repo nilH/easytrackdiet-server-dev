@@ -3,25 +3,25 @@ package nilH.easyTrackDiet.dto;
 
 public class LoginFormData {
 
-    private String errorDisplay;
-    private String messageDisplay;
+    private String email;
+    private String password;
 
     public LoginFormData(){}
-    public LoginFormData(String errorDisplay, String messageDisplay){
-        this.errorDisplay=errorDisplay;
-        this.messageDisplay=messageDisplay;
+    public LoginFormData(String email, String password){
+        this.email=email;
+        this.password=password;
     }
 
-    public void setErrorDisplay(String errorDisplay) {
-        this.errorDisplay = errorDisplay;
-    }
-    public String getErrorDisplay() {
-        return errorDisplay;
-    }
-    public void setMessageDisplay(String messageDisplay) {
-        this.messageDisplay = messageDisplay;
-    }
-    public String getMessageDisplay() {
-        return messageDisplay;
-    }
+   public void setEmail(String email) {
+       this.email = email;
+   }
+   public String getEmail() {
+       return email;
+   }
+   public void setPassword(String password) {
+       this.password = password;
+   }
+   public String getPassword() {
+       return password;
+   }
 }
