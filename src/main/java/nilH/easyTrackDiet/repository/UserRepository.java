@@ -1,9 +1,11 @@
 package nilH.easyTrackDiet.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.springframework.data.r2dbc.repository.R2dbcRepository;
 
 import nilH.easyTrackDiet.model.User;
+import reactor.core.publisher.Mono;
 
-public interface UserRepository extends JpaRepository<User,Integer> {
-    User findByEmail(String email);
+public interface UserRepository extends R2dbcRepository<User,Integer> {
+    Mono<User> findByEmail(String email);
 }

@@ -1,7 +1,6 @@
 package nilH.easyTrackDiet;
 
 import org.hamcrest.core.StringStartsWith;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,19 +8,15 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+
 
 import nilH.easyTrackDiet.dto.SignupFormData;
 import nilH.easyTrackDiet.dto.TokenData;
-import nilH.easyTrackDiet.util.JWTFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.SharedHttpSessionConfigurer.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -29,7 +24,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.*;
+
 
 @AutoConfigureMockMvc
 @SpringBootTest

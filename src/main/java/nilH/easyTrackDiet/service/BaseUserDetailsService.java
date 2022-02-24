@@ -3,24 +3,24 @@ package nilH.easyTrackDiet.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import nilH.easyTrackDiet.dao.UserDao;
-import nilH.easyTrackDiet.model.Role;
+
 import nilH.easyTrackDiet.model.User;
+import reactor.core.publisher.Mono;
 
 //user service for spring security
 //encapsulate an extended User class as UserDetail for security use
 @Component
-public class BaseUserDetailsService implements UserDetailsService {
+public class BaseUserDetailsService implements ReactiveUserDetailsService {
     private final UserDao userDao;
 
     @Autowired
@@ -31,13 +31,17 @@ public class BaseUserDetailsService implements UserDetailsService {
         this.userDao=userDao;
     }
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user= userDao.findUserByEmail(username);
-        if(user==null){
-            throw new UsernameNotFoundException("email not found");
-        }
-        return new BaseUserDetails(user);
+    public Mono<UserDetails> findByUsername(String username) throws UsernameNotFoundException{
+        Mono<User> user= userDao.findUserByEmail(username);
+        return user.map(u->{
+            if(u==null){
+                throw new UsernameNotFoundException("email not found");
+            }else{
+                return new BaseUserDetails(u);
+            }
+        });
     }
+
 
     private class BaseUserDetails extends User implements UserDetails{
         BaseUserDetails(User user){
@@ -46,13 +50,15 @@ public class BaseUserDetailsService implements UserDetailsService {
             setPwd(user.getPwd());
             setHeight(user.getHeight());
             setWeight(user.getWeight());
-            setRoles(user.getRoles());
+            setRole_idS(user.getRole_idS());
         }
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            Set<Role> roles= this.getRoles();
+            int[] role_idS= this.getRole_idS();
             List<GrantedAuthority> authorities=new ArrayList<GrantedAuthority>();
-            roles.forEach((role) ->authorities.add(new SimpleGrantedAuthority(role.getName())) );
+            for(int role_id: role_idS){
+                authorities.add(new SimpleGrantedAuthority(String.valueOf(role_id)));
+            }
             return authorities;
         }
         @Override

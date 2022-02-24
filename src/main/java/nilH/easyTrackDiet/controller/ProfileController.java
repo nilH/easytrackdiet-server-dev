@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import nilH.easyTrackDiet.dto.SignupFormData;
 import nilH.easyTrackDiet.model.User;
 import nilH.easyTrackDiet.service.BaseService;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/forms/profile")
@@ -18,21 +19,21 @@ public class ProfileController {
     BaseService baseService;
 
     @GetMapping(value = "/test")
-    public SignupFormData gettest(){
+    public SignupFormData gettest() {
         return new SignupFormData();
     }
 
-    @GetMapping(value="/getUserInfo")
-    public SignupFormData getProfile(){
-        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
-        String email=(String)authentication.getPrincipal();
-        if(email==null){
+    @GetMapping(value = "/getUserInfo")
+    public Mono<User> getProfile() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = (String) authentication.getPrincipal();
+        if (email == null) {
             throw new NullPointerException("null principle in authentication");
         }
-        User user=baseService.findUserByEmail(email);
-        if(user==null){
+        Mono<User> user = baseService.findUserByEmail(email);
+        if (user == null) {
             throw new NullPointerException("get null user profile");
         }
-        return new SignupFormData("null",user.getEmail(),user.getPwd(),user.getWeight(),user.getHeight());
+        return user;
     }
 }

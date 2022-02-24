@@ -3,12 +3,12 @@ package nilH.easyTrackDiet.model;
 import java.io.Serializable;
 import java.sql.Time;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name = "record")
+
+
+@Table
 public class Record implements Serializable{
     @Id
     private int record_id;

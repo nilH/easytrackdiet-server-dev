@@ -1,31 +1,21 @@
 package nilH.easyTrackDiet.model;
 
 import java.io.Serializable;
-import java.util.*;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name="user")
+
+
+@Table
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int user_id;
     private String email;
     private String pwd;
     private int weight;
     private int height;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="user_role",joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
-    private Set<Role> roles;
+    private int[] role_idS;
     public User(){};
     public User(String email, String pwd, int height, int weight){
         this.email=email;
@@ -63,10 +53,10 @@ public class User implements Serializable {
     public void setHeight(int height) {
         this.height = height;
     }
-    public Set<Role> getRoles() {
-        return roles;
+    public int[] getRole_idS() {
+        return role_idS;
     }
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole_idS(int[] role_idS) {
+        this.role_idS = role_idS;
     }
 }

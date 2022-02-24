@@ -2,18 +2,15 @@ package nilH.easyTrackDiet.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+
 
 //role_id=0 user; role_id=1 admin
-@Entity
-@Table(name="role")
+@Table
 public class Role implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer role_id;
     private String name;
 
