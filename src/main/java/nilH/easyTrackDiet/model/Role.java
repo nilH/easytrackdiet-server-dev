@@ -8,11 +8,16 @@ import org.springframework.data.relational.core.mapping.Table;
 
 
 //role_id=0 user; role_id=1 admin
-@Table
+@Table(value = "arole")
 public class Role implements Serializable{
     @Id
     private Integer role_id;
     private String name;
+
+    public Role(){}
+    public Role(String name){
+        this.name=name;
+    }
 
     public Integer getRole_id() {
         return role_id;

@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 
 
 
-@Table
+@Table(value = "auser")
 public class User implements Serializable {
     @Id
     private int user_id;
@@ -15,7 +15,7 @@ public class User implements Serializable {
     private String pwd;
     private int weight;
     private int height;
-    private int[] role_idS;
+    private int[] role_ids;
     public User(){};
     public User(String email, String pwd, int height, int weight){
         this.email=email;
@@ -23,11 +23,11 @@ public class User implements Serializable {
         this.height=height;
         this.weight=weight;
     }
-    public Integer getUserId() {
-        return user_id;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
-    public void setUserId(Integer userId) {
-        this.user_id = userId;
+    public int getUser_id() {
+        return user_id;
     }
     public String getEmail() {
         return email;
@@ -53,10 +53,10 @@ public class User implements Serializable {
     public void setHeight(int height) {
         this.height = height;
     }
-    public int[] getRole_idS() {
-        return role_idS;
+    public int[] getRole_ids() {
+        return role_ids;
     }
     public void setRole_idS(int[] role_idS) {
-        this.role_idS = role_idS;
+        this.role_ids = role_idS;
     }
 }

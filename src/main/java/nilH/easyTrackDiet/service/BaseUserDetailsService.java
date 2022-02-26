@@ -45,16 +45,16 @@ public class BaseUserDetailsService implements ReactiveUserDetailsService {
 
     private class BaseUserDetails extends User implements UserDetails{
         BaseUserDetails(User user){
-            setUserId(user.getUserId());
+            setUser_id(user.getUser_id());
             setEmail(user.getEmail());
             setPwd(user.getPwd());
             setHeight(user.getHeight());
             setWeight(user.getWeight());
-            setRole_idS(user.getRole_idS());
+            setRole_idS(user.getRole_ids());
         }
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            int[] role_idS= this.getRole_idS();
+            int[] role_idS= this.getRole_ids();
             List<GrantedAuthority> authorities=new ArrayList<GrantedAuthority>();
             for(int role_id: role_idS){
                 authorities.add(new SimpleGrantedAuthority(String.valueOf(role_id)));

@@ -21,6 +21,7 @@ dependencies {
 	implementation 'io.r2dbc:r2dbc-postgresql:0.8.10.RELEASE'
 	implementation 'javax.servlet:javax.servlet-api:4.0.1'
 	implementation 'com.auth0:java-jwt:3.18.2'
+	testImplementation 'io.projectreactor:reactor-test:3.4.15'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test:5.6.1'
 }

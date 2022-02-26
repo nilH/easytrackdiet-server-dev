@@ -1,6 +1,10 @@
 package nilH.easyTrackDiet.dto;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class TokenData {
+    private Logger logger=LoggerFactory.getLogger(TokenData.class);
     String jwtToken;
     String signupError;
     public TokenData(){}

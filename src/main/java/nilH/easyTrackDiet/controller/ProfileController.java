@@ -1,7 +1,10 @@
 package nilH.easyTrackDiet.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +20,7 @@ import reactor.core.publisher.Mono;
 public class ProfileController {
     @Autowired
     BaseService baseService;
+    private Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @GetMapping(value = "/test")
     public SignupFormData gettest() {
@@ -25,15 +29,13 @@ public class ProfileController {
 
     @GetMapping(value = "/getUserInfo")
     public Mono<User> getProfile() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String email = (String) authentication.getPrincipal();
-        if (email == null) {
-            throw new NullPointerException("null principle in authentication");
-        }
-        Mono<User> user = baseService.findUserByEmail(email);
-        if (user == null) {
-            throw new NullPointerException("get null user profile");
-        }
-        return user;
+        return ReactiveSecurityContextHolder.getContext().filter(context -> context.getAuthentication() != null)
+                .map(context -> {
+                    return (String) context.getAuthentication().getPrincipal();
+                }).flatMap(email -> {
+                    logger.info("getprofile controller email " + email);
+                    return baseService.findUserByEmail(email)
+                            .switchIfEmpty(Mono.error(new Throwable("user email not found")));
+                });
     }
 }

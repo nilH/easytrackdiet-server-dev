@@ -2,6 +2,8 @@ package nilH.easyTrackDiet.dao;
 
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import reactor.core.publisher.Mono;
 @Repository
 public class UserDaoImpl implements UserDao {
     private UserRepository userRepository;
+    private Logger logger=LoggerFactory.getLogger(UserDaoImpl.class);
     @Autowired
     public UserDaoImpl(UserRepository userRepository){
         this.userRepository=userRepository;
@@ -23,7 +26,11 @@ public class UserDaoImpl implements UserDao {
     }
     @Override
     public Mono<User> findUserByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).map(u->{
+            logger.info("finduserbyemail  "+u.getEmail());
+            return u;
+        }
+        );
     }
     @Transactional
     @Override

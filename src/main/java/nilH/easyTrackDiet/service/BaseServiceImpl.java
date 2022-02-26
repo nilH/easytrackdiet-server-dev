@@ -1,5 +1,8 @@
 package nilH.easyTrackDiet.service;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -13,6 +16,7 @@ import reactor.core.publisher.Mono;
 public class BaseServiceImpl implements BaseService{
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
+    private Logger logger = LoggerFactory.getLogger(BaseServiceImpl.class);
     @Autowired
     public BaseServiceImpl(final UserDao userDao){
         this.userDao=userDao;
@@ -24,6 +28,7 @@ public class BaseServiceImpl implements BaseService{
     }
     @Override
     public Mono<User> findUserByEmail(String email) {
+        logger.info("base service find user by email "+email);
         return userDao.findUserByEmail(email);
     }
     @Override
