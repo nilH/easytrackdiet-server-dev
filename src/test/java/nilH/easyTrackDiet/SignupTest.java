@@ -52,7 +52,6 @@ public class SignupTest {
 
     @Test
     public void atest() throws Exception {
-        SignupFormData data = new SignupFormData("admin", "emai13", "password1", 50, 150);
         webTestClient.get().uri("/signup/test").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk()
                 .expectHeader().contentType(MediaType.APPLICATION_JSON).expectBody(String.class)
                 .consumeWith(response->{
