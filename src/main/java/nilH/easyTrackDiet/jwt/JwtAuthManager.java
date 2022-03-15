@@ -1,4 +1,4 @@
-package nilH.easyTrackDiet.util;
+package nilH.easyTrackDiet.jwt;
 
 
 import org.springframework.security.authentication.ReactiveAuthenticationManager;

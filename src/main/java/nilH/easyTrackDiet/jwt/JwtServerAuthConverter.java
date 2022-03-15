@@ -1,4 +1,4 @@
-package nilH.easyTrackDiet.util;
+package nilH.easyTrackDiet.jwt;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

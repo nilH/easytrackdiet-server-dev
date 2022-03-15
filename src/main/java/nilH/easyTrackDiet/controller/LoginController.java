@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import nilH.easyTrackDiet.dto.LoginFormData;
 import nilH.easyTrackDiet.dto.TokenData;
-import nilH.easyTrackDiet.util.JWTEncryption;
+import nilH.easyTrackDiet.jwt.JWTEncryption;
 import reactor.core.publisher.Mono;
 
 @RestController

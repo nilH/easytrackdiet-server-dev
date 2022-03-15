@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import nilH.easyTrackDiet.dao.UserDao;
 
@@ -19,7 +19,7 @@ import reactor.core.publisher.Mono;
 
 //user service for spring security
 //encapsulate an extended User class as UserDetail for security use
-@Component
+@Service
 public class BaseUserDetailsService implements ReactiveUserDetailsService {
     private final UserDao userDao;
 

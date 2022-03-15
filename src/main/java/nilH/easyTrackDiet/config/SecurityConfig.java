@@ -12,8 +12,8 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
 
-import nilH.easyTrackDiet.util.JwtAuthManager;
-import nilH.easyTrackDiet.util.JwtServerAuthConverter;
+import nilH.easyTrackDiet.jwt.JwtAuthManager;
+import nilH.easyTrackDiet.jwt.JwtServerAuthConverter;
  
 @Configuration
 @EnableWebFluxSecurity

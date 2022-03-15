@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import nilH.easyTrackDiet.dto.SignupFormData;
 import nilH.easyTrackDiet.dto.TokenData;
+import nilH.easyTrackDiet.jwt.JWTEncryption;
 import nilH.easyTrackDiet.model.User;
 import nilH.easyTrackDiet.repository.UserRepository;
 import nilH.easyTrackDiet.service.BaseService;
-import nilH.easyTrackDiet.util.JWTEncryption;
 import reactor.core.publisher.Mono;
 
 @RestController
