@@ -22,13 +22,13 @@ public class RecordController {
     AutoCompleteService autoCompleteService;
 
     @GetMapping("/init")
-    public Mono<TierData> loadNames(String domain){
-        logger.info("init with domain "+domain);
-        return autoCompleteService.getTier(domain);
+    public Mono<TierData> loadNames(){
+        logger.info("init with record names");
+        return autoCompleteService.getTier("record");
     }
 
     @PostMapping("/update")
     public Mono<TierData> updateNames(@RequestBody TierData ntree){
-        return autoCompleteService.updateTier(ntree, ntree.getDomain());
+        return autoCompleteService.updateTier(ntree, "record");
     }
 }
